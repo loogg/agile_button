@@ -34,8 +34,8 @@
 // 按键消抖默认时间 15ms
 #define AGILE_BUTTON_ELIMINATION_TIME_DEFAULT    15
 
-// 两次按键按下间隔超过2s清零重复计数
-#define AGILE_BUTTON_TWO_INTERVAL_TIME_DEFAULT   1000
+// 两次按键按下间隔超过500ms清零重复计数
+#define AGILE_BUTTON_TWO_INTERVAL_TIME_DEFAULT   500
 
 // 按键按下后持续调用回调函数的周期
 #define AGILE_BUTTON_HOLD_CYCLE_TIME_DEFAULT     1000
