@@ -163,6 +163,7 @@ int agile_btn_set_event_cb(agile_btn_t *btn, enum agile_btn_event event, void (*
 1. 调用 `agile_btn_create` API创建完按键对象后，调用其他API确保按键对象创建成功，否则被断言。
 2. 两次按下间隔在500ms内记为连续按下， `repeact_cnt` 变量自加，否则为0。应用层可以根据该变量得到连续按下多少次，执行相应的动作。
 3. 消抖时间设置可以使用 `agile_btn_set_elimination_time` 该API设置，默认为15ms;BTN_HOLD_EVENT事件回调函数的周期可以使用 `agile_btn_set_hold_cycle_time` 该API设置，默认为1s。
+4. 通过 `hold_time` 变量可以知道按下持续时间，应用层可以根据其做相应的操作
 
 ## 5、联系方式 & 感谢
 
