@@ -1,16 +1,11 @@
 #include <agile_button.h>
-#include <drv_gpio.h>
+#include <stdlib.h>
 #ifdef RT_USING_FINSH
 #include <finsh.h>
 #endif
 
-#define WK_UP_KEY_PIN  GET_PIN(A, 0)
-#define KEY0_PIN       GET_PIN(C, 1)
-#define KEY1_PIN       GET_PIN(C, 13)
-
-static agile_btn_t *wk_up_key = RT_NULL;
-static agile_btn_t *key0 = RT_NULL;
-static agile_btn_t *key1 = RT_NULL;
+static agile_btn_t *_dbtn = RT_NULL;
+static agile_btn_t _sbtn;
 
 static void btn_click_event_cb(agile_btn_t *btn)
 {
@@ -22,55 +17,72 @@ static void btn_hold_event_cb(agile_btn_t *btn)
     rt_kprintf("[button hold event] pin:%d   hold_time:%d\r\n", btn->pin, btn->hold_time);
 }
 
-static void key_create(void)
+static void dbtn_create(int argc, char **argv)
 {
-    if(wk_up_key == RT_NULL)
-    {
-        wk_up_key = agile_btn_create(WK_UP_KEY_PIN, PIN_HIGH, PIN_MODE_INPUT_PULLDOWN);
-        agile_btn_set_event_cb(wk_up_key, BTN_CLICK_EVENT, btn_click_event_cb);
-        agile_btn_set_event_cb(wk_up_key, BTN_HOLD_EVENT, btn_hold_event_cb);
-        agile_btn_start(wk_up_key);
+    int pin = 0;
+    int active = 0;
+
+    if (argc < 3) {
+        rt_kprintf("dbtn_create      --use dbtn_create [pin] [active]\r\n");
+        return;
     }
 
-    if(key0 == RT_NULL)
-    {
-        key0 = agile_btn_create(KEY0_PIN, PIN_LOW, PIN_MODE_INPUT_PULLUP);
-        agile_btn_set_event_cb(key0, BTN_CLICK_EVENT, btn_click_event_cb);
-        agile_btn_set_event_cb(key0, BTN_HOLD_EVENT, btn_hold_event_cb);
-        agile_btn_start(key0);
+    pin = atoi(argv[1]);
+    active = atoi(argv[2]);
+
+    if (_dbtn) {
+        agile_btn_delete(_dbtn);
+        _dbtn = RT_NULL;
     }
 
-    if(key1 == RT_NULL)
-    {
-        key1 = agile_btn_create(KEY1_PIN, PIN_LOW, PIN_MODE_INPUT_PULLUP);
-        agile_btn_set_event_cb(key1, BTN_CLICK_EVENT, btn_click_event_cb);
-        agile_btn_set_event_cb(key1, BTN_HOLD_EVENT, btn_hold_event_cb);
-        agile_btn_start(key1);
-    }
+    if(active == PIN_HIGH)
+        _dbtn = agile_btn_create(pin, active, PIN_MODE_INPUT_PULLDOWN);
+    else
+        _dbtn = agile_btn_create(pin, active, PIN_MODE_INPUT_PULLUP);
+
+    agile_btn_set_event_cb(_dbtn, BTN_CLICK_EVENT, btn_click_event_cb);
+    agile_btn_set_event_cb(_dbtn, BTN_HOLD_EVENT, btn_hold_event_cb);
+    agile_btn_start(_dbtn);
 }
 
-static void key_delete(void)
+static void dbtn_delete(void)
 {
-    if(wk_up_key)
-    {
-        agile_btn_delete(wk_up_key);
-        wk_up_key = RT_NULL;
-    }
-
-    if(key0)
-    {
-        agile_btn_delete(key0);
-        key0 = RT_NULL;
-    }
-
-    if(key1)
-    {
-        agile_btn_delete(key1);
-        key1 = RT_NULL;
+    if (_dbtn) {
+        agile_btn_delete(_dbtn);
+        _dbtn = RT_NULL;
     }
 }
 
 #ifdef RT_USING_FINSH
-MSH_CMD_EXPORT(key_create, create key);
-MSH_CMD_EXPORT(key_delete, delete key);
+MSH_CMD_EXPORT(dbtn_create, create btn);
+MSH_CMD_EXPORT(dbtn_delete, delete btn);
+#endif
+
+static void sbtn_init(int argc, char **argv)
+{
+    int pin = 0;
+    int active = 0;
+
+    if (argc < 3) {
+        rt_kprintf("sbtn_init      --use sbtn_init [pin] [active]\r\n");
+        return;
+    }
+
+    pin = atoi(argv[1]);
+    active = atoi(argv[2]);
+
+    agile_btn_stop(&_sbtn);
+
+    if(active == PIN_HIGH)
+        agile_btn_init(&_sbtn, pin, active, PIN_MODE_INPUT_PULLDOWN);
+    else
+        agile_btn_init(&_sbtn, pin, active, PIN_MODE_INPUT_PULLUP);
+
+    agile_btn_set_event_cb(&_sbtn, BTN_CLICK_EVENT, btn_click_event_cb);
+    agile_btn_set_event_cb(&_sbtn, BTN_HOLD_EVENT, btn_hold_event_cb);
+    agile_btn_start(&_sbtn);
+}
+
+#ifdef RT_USING_FINSH
+MSH_CMD_EXPORT(sbtn_init, init btn);
 #endif
