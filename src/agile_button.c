@@ -2,8 +2,24 @@
  * @file    agile_button.c
  * @brief   Agile Button 软件包源文件
  * @author  马龙伟 (2544047213@qq.com)
- * @version 1.1.0
- * @date    2021-11-28
+ * @version 1.1.1
+ * @date    2021-12-29
+ *
+ @verbatim
+    使用：
+    如果未使能 PKG_AGILE_BUTTON_USING_THREAD_AUTO_INIT:
+    1. agile_btn_env_init 初始化环境
+    2. 创建一个线程，周期调用 agile_btn_process，建议周期时间不要太长
+
+    - agile_btn_create / agile_btn_init 创建 / 初始化对象
+    - agile_btn_set_elimination_time 更改消抖时间，可忽略
+    - agile_btn_set_hold_cycle_time 更改持续按下触发周期时间，可忽略
+      该操作也可在运行过程中执行
+    - agile_btn_set_event_cb 设置事件触发回调
+    - agile_btn_start 启动运行
+    - agile_btn_stop 运行过程中强制停止
+
+ @endverbatim
  *
  * @attention
  *
@@ -162,9 +178,7 @@ static void agile_btn_cal_hold_time(agile_btn_t *btn)
  * @param   pin 按键引脚
  * @param   active_logic 有效电平
  * @param   pin_mode 引脚模式
- * @return
- * - !=RT_NULL:Agile Button 对象指针
- * - RT_NULL:异常
+ * @return  !=RT_NULL:Agile Button 对象指针; RT_NULL:异常
  */
 agile_btn_t *agile_btn_create(uint32_t pin, uint32_t active_logic, uint32_t pin_mode)
 {
@@ -199,8 +213,7 @@ agile_btn_t *agile_btn_create(uint32_t pin, uint32_t active_logic, uint32_t pin_
 /**
  * @brief   删除 Agile Button 对象
  * @param   btn Agile Button 对象指针
- * @return
- * - RT_EOK:成功
+ * @return  RT_EOK:成功
  */
 int agile_btn_delete(agile_btn_t *btn)
 {
@@ -223,9 +236,7 @@ int agile_btn_delete(agile_btn_t *btn)
  * @param   pin 按键引脚
  * @param   active_logic 有效电平
  * @param   pin_mode 引脚模式
- * @return
- * - RT_EOK:成功
- * - !=RT_EOK:异常
+ * @return  RT_EOK:成功; !=RT_EOK:异常
  */
 int agile_btn_init(agile_btn_t *btn, uint32_t pin, uint32_t active_logic, uint32_t pin_mode)
 {
@@ -258,9 +269,7 @@ int agile_btn_init(agile_btn_t *btn, uint32_t pin, uint32_t active_logic, uint32
 /**
  * @brief   启动 Agile Button 对象
  * @param   btn Agile Button 对象指针
- * @return
- * - RT_EOK:成功
- * - !=RT_OK:异常
+ * @return  RT_EOK:成功; !=RT_OK:异常
  */
 int agile_btn_start(agile_btn_t *btn)
 {
@@ -287,8 +296,7 @@ int agile_btn_start(agile_btn_t *btn)
 /**
  * @brief   停止 Agile Button 对象
  * @param   btn Agile Button 对象指针
- * @return
- * - RT_EOK:成功
+ * @return  RT_EOK:成功
  */
 int agile_btn_stop(agile_btn_t *btn)
 {
@@ -311,8 +319,7 @@ int agile_btn_stop(agile_btn_t *btn)
  * @brief   设置按键消抖时间
  * @param   btn Agile Button 对象指针
  * @param   elimination_time 消抖时间(单位ms)
- * @return
- * - RT_EOK:成功
+ * @return  RT_EOK:成功
  */
 int agile_btn_set_elimination_time(agile_btn_t *btn, uint8_t elimination_time)
 {
@@ -329,8 +336,7 @@ int agile_btn_set_elimination_time(agile_btn_t *btn, uint8_t elimination_time)
  * @brief   设置按键按下后 BTN_HOLD_EVENT 事件回调函数的周期
  * @param   btn Agile Button 对象指针
  * @param   hold_cycle_time 周期时间(单位ms)
- * @return
- * - RT_EOK:成功
+ * @return  RT_EOK:成功
  */
 int agile_btn_set_hold_cycle_time(agile_btn_t *btn, uint32_t hold_cycle_time)
 {
@@ -348,9 +354,7 @@ int agile_btn_set_hold_cycle_time(agile_btn_t *btn, uint32_t hold_cycle_time)
  * @param   btn Agile Button 对象指针
  * @param   event 事件类型
  * @param   event_cb 事件回调函数
- * @return
- * - RT_EOK:成功
- * - !=RT_OK:异常
+ * @return  RT_EOK:成功; !=RT_OK:异常
  */
 int agile_btn_set_event_cb(agile_btn_t *btn, enum agile_btn_event event, void (*event_cb)(agile_btn_t *btn))
 {
@@ -482,8 +486,7 @@ static void agile_btn_auto_thread_entry(void *parameter)
 
 /**
  * @brief   Agile Button 内部线程初始化
- * @return
- * - RT_EOK:成功
+ * @return  RT_EOK:成功
  */
 static int agile_btn_auto_thread_init(void)
 {

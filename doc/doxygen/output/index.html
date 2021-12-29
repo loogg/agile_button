@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Agile Button<span id="projectnumber">&#160;1.1.0</span>
+   <div id="projectname">Agile Button<span id="projectnumber">&#160;1.1.1</span>
    </div>
    <div id="projectbrief">A agile button package.</div>
   </td>
@@ -86,20 +86,63 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">Agile Button </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_C__Users_25440_Desktop_test_packages_agile_button_latest_README"></a> </p>
-<h1><a class="anchor" id="autotoc_md5"></a>
+<div class="textblock"><p ><a class="anchor" id="md_C__Users_longwei_ma_Desktop_test_packages_agile_button_README"></a> </p>
+<h1><a class="anchor" id="autotoc_md12"></a>
 1、介绍</h1>
 <p >Agile Button 是基于 RT-Thread 实现的 button 软件包，提供 button 操作的 API。</p>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<ul>
+<li>按键操作的状态变化为：<code>未按下 ——&gt; 按下 ——&gt; 未按下</code>。</li>
+<li>为了消除干扰，默认的消抖时间为 15ms，可以通过 <code>agile_btn_set_elimination_time</code> API 更改消抖时间。</li>
+<li>间隔在 500ms 内的连续操作，记为多次操作，更改对象的 <code>repeat_cnt</code> 属性，通过该属性可获取连续操作次数。</li>
+<li>在按下期间会计算对象的持续按下时间，可通过对象的 <code>hold_time</code> 属性获取。</li>
+</ul>
+<div class="fragment"><div class="line">   ____          __      __          ____</div>
+<div class="line">__|    |__  ——&gt;    |____|    ——&gt;  __|    |__</div>
+</div><!-- fragment --><p >Agile Button 提供了 4 种事件：</p>
+<div class="fragment"><div class="line"><a class="code hl_enumvalue" href="group___a_g_i_l_e___b_u_t_t_o_n___exported___types.html#gga316da8935bab270fc11e7005adf3fbadae5aa64bd5d8b627c0b3dbcdbc43dd9a8">BTN_PRESS_DOWN_EVENT</a></div>
+<div class="line"><a class="code hl_enumvalue" href="group___a_g_i_l_e___b_u_t_t_o_n___exported___types.html#gga316da8935bab270fc11e7005adf3fbadaab8eeec2a79f26abdcd5304b0ee3711f">BTN_HOLD_EVENT</a></div>
+<div class="line"><a class="code hl_enumvalue" href="group___a_g_i_l_e___b_u_t_t_o_n___exported___types.html#gga316da8935bab270fc11e7005adf3fbadaf229d1c6160f8445915d56fe0e006ec9">BTN_PRESS_UP_EVENT</a></div>
+<div class="line"><a class="code hl_enumvalue" href="group___a_g_i_l_e___b_u_t_t_o_n___exported___types.html#gga316da8935bab270fc11e7005adf3fbada94c58bb9ec02ebf6da5e4c07da9da50c">BTN_CLICK_EVENT</a></div>
+<div class="ttc" id="agroup___a_g_i_l_e___b_u_t_t_o_n___exported___types_html_gga316da8935bab270fc11e7005adf3fbada94c58bb9ec02ebf6da5e4c07da9da50c"><div class="ttname"><a href="group___a_g_i_l_e___b_u_t_t_o_n___exported___types.html#gga316da8935bab270fc11e7005adf3fbada94c58bb9ec02ebf6da5e4c07da9da50c">BTN_CLICK_EVENT</a></div><div class="ttdeci">@ BTN_CLICK_EVENT</div><div class="ttdoc">点击事件</div><div class="ttdef"><b>Definition:</b> <a href="agile__button_8h_source.html#l00037">agile_button.h:37</a></div></div>
+<div class="ttc" id="agroup___a_g_i_l_e___b_u_t_t_o_n___exported___types_html_gga316da8935bab270fc11e7005adf3fbadaab8eeec2a79f26abdcd5304b0ee3711f"><div class="ttname"><a href="group___a_g_i_l_e___b_u_t_t_o_n___exported___types.html#gga316da8935bab270fc11e7005adf3fbadaab8eeec2a79f26abdcd5304b0ee3711f">BTN_HOLD_EVENT</a></div><div class="ttdeci">@ BTN_HOLD_EVENT</div><div class="ttdoc">持续按下有效事件</div><div class="ttdef"><b>Definition:</b> <a href="agile__button_8h_source.html#l00035">agile_button.h:35</a></div></div>
+<div class="ttc" id="agroup___a_g_i_l_e___b_u_t_t_o_n___exported___types_html_gga316da8935bab270fc11e7005adf3fbadae5aa64bd5d8b627c0b3dbcdbc43dd9a8"><div class="ttname"><a href="group___a_g_i_l_e___b_u_t_t_o_n___exported___types.html#gga316da8935bab270fc11e7005adf3fbadae5aa64bd5d8b627c0b3dbcdbc43dd9a8">BTN_PRESS_DOWN_EVENT</a></div><div class="ttdeci">@ BTN_PRESS_DOWN_EVENT</div><div class="ttdoc">按下事件</div><div class="ttdef"><b>Definition:</b> <a href="agile__button_8h_source.html#l00034">agile_button.h:34</a></div></div>
+<div class="ttc" id="agroup___a_g_i_l_e___b_u_t_t_o_n___exported___types_html_gga316da8935bab270fc11e7005adf3fbadaf229d1c6160f8445915d56fe0e006ec9"><div class="ttname"><a href="group___a_g_i_l_e___b_u_t_t_o_n___exported___types.html#gga316da8935bab270fc11e7005adf3fbadaf229d1c6160f8445915d56fe0e006ec9">BTN_PRESS_UP_EVENT</a></div><div class="ttdeci">@ BTN_PRESS_UP_EVENT</div><div class="ttdoc">弹起事件</div><div class="ttdef"><b>Definition:</b> <a href="agile__button_8h_source.html#l00036">agile_button.h:36</a></div></div>
+</div><!-- fragment --><p >可以通过 <code>agile_btn_set_event_cb</code> API 设置每个事件的触发回调。</p>
+<ul>
+<li>BTN_PRESS_DOWN_EVENT</li>
+</ul>
+<p >从 <code>未按下 ——&gt; 按下</code> 触发一次。</p>
+<div class="fragment"><div class="line">   ____          __      __</div>
+<div class="line">__|    |__  ——&gt;    |____|</div>
+</div><!-- fragment --><ul>
+<li>BTN_HOLD_EVENT</li>
+</ul>
+<p >一直处于按下状态，默认每隔 1s 触发一次，可以通过 <code>agile_btn_set_hold_cycle_time</code> API 更改触发周期。</p>
+<div class="fragment"><div class="line">__      __</div>
+<div class="line">  |____|</div>
+</div><!-- fragment --><ul>
+<li>BTN_PRESS_UP_EVENT</li>
+</ul>
+<p >从 <code>按下 ——&gt; 未按下</code> 触发一次。</p>
+<div class="fragment"><div class="line">__      __          ____</div>
+<div class="line">  |____|    ——&gt;  __|    |__</div>
+</div><!-- fragment --><ul>
+<li>BTN_CLICK_EVENT</li>
+</ul>
+<p >一次完整的操作触发一次，即：<code>未按下 ——&gt; 按下 ——&gt; 未按下</code>。</p>
+<p >**注意**：<code>BTN_PRESS_UP_EVENT</code> 也会被触发。</p>
+<div class="fragment"><div class="line">   ____          __      __          ____</div>
+<div class="line">__|    |__  ——&gt;    |____|    ——&gt;  __|    |__</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md13"></a>
 1.1、特性</h2>
 <ol type="1">
-<li>代码简洁易懂，充分使用RT-Thread提供的API</li>
+<li>代码简洁易懂，充分使用 RT-Thread 提供的 API</li>
 <li>详细注释</li>
 <li>线程安全</li>
 <li>断言保护</li>
-<li>API操作简单</li>
+<li>API 操作简单</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md7"></a>
+<h2><a class="anchor" id="autotoc_md14"></a>
 1.2、目录结构</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -113,48 +156,52 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">src   </td><td class="markdownTableBodyNone">源代码目录   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md15"></a>
 1.3、许可证</h2>
 <p >Agile Button package 遵循 LGPLv2.1 许可，详见 <code>LICENSE</code> 文件。</p>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md16"></a>
 1.4、依赖</h2>
 <ul>
 <li>RT-Thread 3.0+</li>
 <li>RT-Thread 4.0+</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md10"></a>
+<h1><a class="anchor" id="autotoc_md17"></a>
 2、如何打开 Agile Button</h1>
 <p >使用 Agile Button package 需要在 RT-Thread 的包管理器中选择它，具体路径如下：</p>
 <div class="fragment"><div class="line">RT-Thread online packages</div>
 <div class="line">    peripheral libraries and drivers ---&gt;</div>
 <div class="line">        [*] agile_button: A agile button package</div>
 </div><!-- fragment --><p >然后让 RT-Thread 的包管理器自动更新，或者使用 <code>pkgs --update</code> 命令更新包到 BSP 中。</p>
-<h1><a class="anchor" id="autotoc_md11"></a>
+<h1><a class="anchor" id="autotoc_md18"></a>
 3、使用 Agile Button</h1>
 <ul>
-<li>在打开 Agile Button package 后，当进行 bsp 编译时，它会被加入到 bsp 工程中进行编译。</li>
-<li>文档请查看 <a href="./doc/doxygen/Agile_Button.chm">doc/doxygen/Agile_Button.chm</a></li>
+<li>帮助文档请查看 <a href="./doc/doxygen/Agile_Button.chm">doc/doxygen/Agile_Button.chm</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<p >如果未使能 PKG_AGILE_BUTTON_USING_THREAD_AUTO_INIT:</p>
+<ol type="1">
+<li>agile_btn_env_init 初始化环境</li>
+<li>创建一个线程，周期调用 agile_btn_process，建议周期时间不要太长</li>
+</ol>
+<ul>
+<li>agile_btn_create / agile_btn_init 创建 / 初始化对象</li>
+<li>agile_btn_set_elimination_time 更改消抖时间，可忽略</li>
+<li>agile_btn_set_hold_cycle_time 更改持续按下触发周期时间，可忽略 该操作也可在运行过程中执行</li>
+<li>agile_btn_set_event_cb 设置事件触发回调</li>
+<li>agile_btn_start 启动运行</li>
+<li>agile_btn_stop 运行过程中强制停止</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md19"></a>
 3.1、示例</h2>
 <p >使用示例在 <a href="./examples">examples</a> 下。</p>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md20"></a>
 3.2、Doxygen 文档生成</h2>
 <ul>
 <li>使用 <code>Doxywizard</code> 打开 <a href="./doc/doxygen/Doxyfile">Doxyfile</a> 运行，生成的文件在 <a href="./doc/doxygen/output">doxygen/output</a> 下。</li>
 <li>需要更改 <code>Graphviz</code> 路径。</li>
 <li><code>HTML</code> 生成未使用 <code>chm</code> 格式的，如果使能需要更改 <code>hhc.exe</code> 路径。</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md14"></a>
-4、注意事项</h1>
-<ol type="1">
-<li>调用 <code>agile_btn_create</code> API创建完按键对象后，调用其他API确保按键对象创建成功，否则被断言。</li>
-<li>两次按下间隔在500ms内记为连续按下， <code>repeact_cnt</code> 变量自加，否则为0。应用层可以根据该变量得到连续按下多少次，执行相应的动作。</li>
-<li>消抖时间设置可以使用 <code>agile_btn_set_elimination_time</code> 该API设置，默认为15ms;BTN_HOLD_EVENT事件回调函数的周期可以使用 <code>agile_btn_set_hold_cycle_time</code> 该API设置，默认为1s。</li>
-<li>通过 <code>hold_time</code> 变量可以知道按下持续时间，应用层可以根据其做相应的操作</li>
-</ol>
-<h1><a class="anchor" id="autotoc_md15"></a>
-5、联系方式 &amp; 感谢</h1>
+<h1><a class="anchor" id="autotoc_md21"></a>
+4、联系方式 &amp; 感谢</h1>
 <ul>
 <li>维护：马龙伟</li>
 <li>主页：<a href="https://github.com/loogg/agile_button">https://github.com/loogg/agile_button</a></li>
