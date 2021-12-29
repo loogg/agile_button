@@ -122,7 +122,9 @@ RT-Thread online packages
 - agile_btn_create / agile_btn_init 创建 / 初始化对象
 - agile_btn_set_elimination_time 更改消抖时间，可忽略
 - agile_btn_set_hold_cycle_time 更改持续按下触发周期时间，可忽略
+
   该操作也可在运行过程中执行
+
 - agile_btn_set_event_cb 设置事件触发回调
 - agile_btn_start 启动运行
 - agile_btn_stop 运行过程中强制停止
