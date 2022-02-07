@@ -86,8 +86,8 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">Agile Button </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_C__Users_longwei_ma_Desktop_test_packages_agile_button_README"></a> </p>
-<h1><a class="anchor" id="autotoc_md12"></a>
+<div class="textblock"><p ><a class="anchor" id="md_D__RT_Thread_Learning_rt_thread_bsp_stm32_stm32f407_atk_explorer_packages_agile_button_latest_README"></a> </p>
+<h1><a class="anchor" id="autotoc_md14"></a>
 1、介绍</h1>
 <p >Agile Button 是基于 RT-Thread 实现的 button 软件包，提供 button 操作的 API。</p>
 <ul>
@@ -96,9 +96,8 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <li>间隔在 500ms 内的连续操作，记为多次操作，更改对象的 <code>repeat_cnt</code> 属性，通过该属性可获取连续操作次数。</li>
 <li>在按下期间会计算对象的持续按下时间，可通过对象的 <code>hold_time</code> 属性获取。</li>
 </ul>
-<div class="fragment"><div class="line">   ____          __      __          ____</div>
-<div class="line">__|    |__  ——&gt;    |____|    ——&gt;  __|    |__</div>
-</div><!-- fragment --><p >Agile Button 提供了 4 种事件：</p>
+<p ><img src="./figures/Whole.jpg" alt="Whole" class="inline"/></p>
+<p >Agile Button 提供了 4 种事件：</p>
 <div class="fragment"><div class="line"><a class="code hl_enumvalue" href="group___a_g_i_l_e___b_u_t_t_o_n___exported___types.html#gga316da8935bab270fc11e7005adf3fbadae5aa64bd5d8b627c0b3dbcdbc43dd9a8">BTN_PRESS_DOWN_EVENT</a></div>
 <div class="line"><a class="code hl_enumvalue" href="group___a_g_i_l_e___b_u_t_t_o_n___exported___types.html#gga316da8935bab270fc11e7005adf3fbadaab8eeec2a79f26abdcd5304b0ee3711f">BTN_HOLD_EVENT</a></div>
 <div class="line"><a class="code hl_enumvalue" href="group___a_g_i_l_e___b_u_t_t_o_n___exported___types.html#gga316da8935bab270fc11e7005adf3fbadaf229d1c6160f8445915d56fe0e006ec9">BTN_PRESS_UP_EVENT</a></div>
@@ -112,28 +111,24 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <li>BTN_PRESS_DOWN_EVENT</li>
 </ul>
 <p >从 <code>未按下 ——&gt; 按下</code> 触发一次。</p>
-<div class="fragment"><div class="line">   ____          __      __</div>
-<div class="line">__|    |__  ——&gt;    |____|</div>
-</div><!-- fragment --><ul>
+<p ><img src="./figures/Down.jpg" alt="Down" class="inline"/></p>
+<ul>
 <li>BTN_HOLD_EVENT</li>
 </ul>
 <p >一直处于按下状态，默认每隔 1s 触发一次，可以通过 <code>agile_btn_set_hold_cycle_time</code> API 更改触发周期。</p>
-<div class="fragment"><div class="line">__      __</div>
-<div class="line">  |____|</div>
-</div><!-- fragment --><ul>
+<p ><img src="./figures/Hold.jpg" alt="Hold" class="inline"/></p>
+<ul>
 <li>BTN_PRESS_UP_EVENT</li>
 </ul>
 <p >从 <code>按下 ——&gt; 未按下</code> 触发一次。</p>
-<div class="fragment"><div class="line">__      __          ____</div>
-<div class="line">  |____|    ——&gt;  __|    |__</div>
-</div><!-- fragment --><ul>
+<p ><img src="./figures/Up.jpg" alt="Up" class="inline"/></p>
+<ul>
 <li>BTN_CLICK_EVENT</li>
 </ul>
 <p >一次完整的操作触发一次，即：<code>未按下 ——&gt; 按下 ——&gt; 未按下</code>。</p>
-<p >**注意**：<code>BTN_PRESS_UP_EVENT</code> 也会被触发。</p>
-<div class="fragment"><div class="line">   ____          __      __          ____</div>
-<div class="line">__|    |__  ——&gt;    |____|    ——&gt;  __|    |__</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md13"></a>
+<p ><b>注意</b> ：<code>BTN_PRESS_UP_EVENT</code> 也会被触发。</p>
+<p ><img src="./figures/Click.jpg" alt="Click" class="inline"/></p>
+<h2><a class="anchor" id="autotoc_md15"></a>
 1.1、特性</h2>
 <ol type="1">
 <li>代码简洁易懂，充分使用 RT-Thread 提供的 API</li>
@@ -142,37 +137,39 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <li>断言保护</li>
 <li>API 操作简单</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<h2><a class="anchor" id="autotoc_md16"></a>
 1.2、目录结构</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">名称   </th><th class="markdownTableHeadNone">说明    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">doc   </td><td class="markdownTableBodyNone">文档目录    </td></tr>
+<td class="markdownTableBodyNone">doc   </td><td class="markdownTableBodyNone">文档    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">examples   </td><td class="markdownTableBodyNone">例子目录    </td></tr>
+<td class="markdownTableBodyNone">examples   </td><td class="markdownTableBodyNone">例子    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">inc   </td><td class="markdownTableBodyNone">头文件目录    </td></tr>
+<td class="markdownTableBodyNone">figures   </td><td class="markdownTableBodyNone">素材    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">src   </td><td class="markdownTableBodyNone">源代码目录   </td></tr>
+<td class="markdownTableBodyNone">inc   </td><td class="markdownTableBodyNone">头文件    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">src   </td><td class="markdownTableBodyNone">源代码   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md15"></a>
+<h2><a class="anchor" id="autotoc_md17"></a>
 1.3、许可证</h2>
 <p >Agile Button package 遵循 LGPLv2.1 许可，详见 <code>LICENSE</code> 文件。</p>
-<h2><a class="anchor" id="autotoc_md16"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 1.4、依赖</h2>
 <ul>
 <li>RT-Thread 3.0+</li>
 <li>RT-Thread 4.0+</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md17"></a>
+<h1><a class="anchor" id="autotoc_md19"></a>
 2、如何打开 Agile Button</h1>
 <p >使用 Agile Button package 需要在 RT-Thread 的包管理器中选择它，具体路径如下：</p>
 <div class="fragment"><div class="line">RT-Thread online packages</div>
 <div class="line">    peripheral libraries and drivers ---&gt;</div>
 <div class="line">        [*] agile_button: A agile button package</div>
 </div><!-- fragment --><p >然后让 RT-Thread 的包管理器自动更新，或者使用 <code>pkgs --update</code> 命令更新包到 BSP 中。</p>
-<h1><a class="anchor" id="autotoc_md18"></a>
+<h1><a class="anchor" id="autotoc_md20"></a>
 3、使用 Agile Button</h1>
 <ul>
 <li>帮助文档请查看 <a href="./doc/doxygen/Agile_Button.chm">doc/doxygen/Agile_Button.chm</a></li>
@@ -192,17 +189,17 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <li>agile_btn_start 启动运行</li>
 <li>agile_btn_stop 运行过程中强制停止</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md19"></a>
+<h2><a class="anchor" id="autotoc_md21"></a>
 3.1、示例</h2>
 <p >使用示例在 <a href="./examples">examples</a> 下。</p>
-<h2><a class="anchor" id="autotoc_md20"></a>
+<h2><a class="anchor" id="autotoc_md22"></a>
 3.2、Doxygen 文档生成</h2>
 <ul>
 <li>使用 <code>Doxywizard</code> 打开 <a href="./doc/doxygen/Doxyfile">Doxyfile</a> 运行，生成的文件在 <a href="./doc/doxygen/output">doxygen/output</a> 下。</li>
 <li>需要更改 <code>Graphviz</code> 路径。</li>
 <li><code>HTML</code> 生成未使用 <code>chm</code> 格式的，如果使能需要更改 <code>hhc.exe</code> 路径。</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md21"></a>
+<h1><a class="anchor" id="autotoc_md23"></a>
 4、联系方式 &amp; 感谢</h1>
 <ul>
 <li>维护：马龙伟</li>
