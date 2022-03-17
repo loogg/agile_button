@@ -105,6 +105,8 @@ RT-Thread online packages
 - agile_btn_set_hold_cycle_time 更改持续按下触发周期时间，可忽略
 
   该操作也可在运行过程中执行
+- agile_btn_set_two_interval_time 更改两次按键按下间隔的超时时间
+  该操作可以修改多击操作的响应速度
 
 - agile_btn_set_event_cb 设置事件触发回调
 - agile_btn_start 启动运行
