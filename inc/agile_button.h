@@ -63,6 +63,7 @@ struct agile_btn {
     uint32_t hold_time;                                /**< 按键按下持续时间(单位ms) */
     uint32_t prev_hold_time;                           /**< 缓存 hold_time 变量 */
     uint32_t hold_cycle_time;                          /**< 按键按下后持续调用回调函数的周期(单位ms,默认1s) */
+    uint32_t two_interval_time;                        /**< 两次按键按下间隔的超时时间 */
     uint32_t pin;                                      /**< 按键引脚 */
     uint32_t active_logic;                             /**< 有效电平(PIN_HIGH/PIN_LOW) */
     rt_tick_t tick_timeout;                            /**< 超时时间 */
@@ -87,6 +88,7 @@ int agile_btn_start(agile_btn_t *btn);
 int agile_btn_stop(agile_btn_t *btn);
 int agile_btn_set_elimination_time(agile_btn_t *btn, uint8_t elimination_time);
 int agile_btn_set_hold_cycle_time(agile_btn_t *btn, uint32_t hold_cycle_time);
+int agile_btn_set_two_interval_time(agile_btn_t *btn, uint32_t two_interval_time);
 int agile_btn_set_event_cb(agile_btn_t *btn, enum agile_btn_event event, void (*event_cb)(agile_btn_t *btn));
 void agile_btn_process(void);
 void agile_btn_env_init(void);

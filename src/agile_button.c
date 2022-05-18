@@ -200,6 +200,7 @@ agile_btn_t *agile_btn_create(uint32_t pin, uint32_t active_logic, uint32_t pin_
     btn->hold_time = 0;
     btn->prev_hold_time = 0;
     btn->hold_cycle_time = AGILE_BUTTON_HOLD_CYCLE_TIME_DEFAULT;
+    btn->two_interval_time = AGILE_BUTTON_TWO_INTERVAL_TIME_DEFAULT;
     btn->pin = pin;
     btn->active_logic = active_logic;
     btn->tick_timeout = rt_tick_get();
@@ -350,6 +351,23 @@ int agile_btn_set_hold_cycle_time(agile_btn_t *btn, uint32_t hold_cycle_time)
 }
 
 /**
+ * @brief   设置两次按键按下间隔的超时时间
+ * @param   btn Agile Button 对象指针
+ * @param   two_interval_time 超时时间(单位ms)
+ * @return  RT_EOK:成功
+ */
+int agile_btn_set_two_interval_time(agile_btn_t *btn, uint32_t two_interval_time)
+{
+    RT_ASSERT(btn);
+
+    rt_mutex_take(&_mtx, RT_WAITING_FOREVER);
+    btn->two_interval_time = two_interval_time;
+    rt_mutex_release(&_mtx);
+
+    return RT_EOK;
+}
+
+/**
  * @brief   设置按键事件回调函数
  * @param   btn Agile Button 对象指针
  * @param   event 事件类型
@@ -391,6 +409,8 @@ void agile_btn_process(void)
                 /* 2次按下中间间隔过大，清零重按计数 */
                 if (btn->repeat_cnt) {
                     if ((rt_tick_get() - btn->tick_timeout) < (RT_TICK_MAX / 2)) {
+                        btn->event = BTN_CLICK_EVENT;
+                        AGILE_BUTTON_EVENT_CB(btn, btn->event);
                         btn->repeat_cnt = 0;
                     }
                 }
@@ -430,10 +450,8 @@ void agile_btn_process(void)
         case BTN_STATE_PRESS_UP: {
             btn->event = BTN_PRESS_UP_EVENT;
             AGILE_BUTTON_EVENT_CB(btn, btn->event);
-            btn->event = BTN_CLICK_EVENT;
-            AGILE_BUTTON_EVENT_CB(btn, btn->event);
 
-            btn->tick_timeout = rt_tick_get() + rt_tick_from_millisecond(AGILE_BUTTON_TWO_INTERVAL_TIME_DEFAULT);
+            btn->tick_timeout = rt_tick_get() + rt_tick_from_millisecond(btn->two_interval_time);
             btn->state = BTN_STATE_NONE_PRESS;
         } break;
         default:
