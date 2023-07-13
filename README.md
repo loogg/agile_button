@@ -16,7 +16,7 @@ Agile Button 是基于 RT-Thread 实现的 button 软件包，提供 button 操�
 
 Agile Button 提供了 4 种事件：
 
-```C
+```c
 BTN_PRESS_DOWN_EVENT
 BTN_HOLD_EVENT
 BTN_PRESS_UP_EVENT
@@ -82,7 +82,7 @@ Agile Button package 遵循 LGPLv2.1 许可，详见 `LICENSE` 文件。
 
 使用 Agile Button package 需要在 RT-Thread 的包管理器中选择它，具体路径如下：
 
-```C
+```c
 RT-Thread online packages
     peripheral libraries and drivers --->
         [*] agile_button: A agile button package
